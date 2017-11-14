@@ -3,8 +3,10 @@ package devs.mulham.raee.sample;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -28,13 +30,17 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        /** end after 1 month from now */
+        /** end after 2 months from now */
         Calendar endDate = Calendar.getInstance();
-        endDate.add(Calendar.MONTH, 1);
+        endDate.add(Calendar.MONTH, 2);
 
-        /** start before 1 month from now */
+        /** start 2 months ago from now */
         Calendar startDate = Calendar.getInstance();
-        startDate.add(Calendar.MONTH, -1);
+        startDate.add(Calendar.MONTH, -2);
+
+        final Calendar defaultDate = Calendar.getInstance();
+        defaultDate.add(Calendar.MONTH, -1);
+        defaultDate.add(Calendar.DAY_OF_WEEK, +5);
 
         horizontalCalendar = new HorizontalCalendar.Builder(this, R.id.calendarView)
                 .startDate(startDate.getTime())
@@ -45,14 +51,16 @@ public class MainActivity extends AppCompatActivity {
                 .monthFormat("MMM")
                 .showDayName(true)
                 .showMonthName(true)
+                .selectedDateBackground(ContextCompat.getDrawable(this, R.drawable.sample_selected_background))
+                .defaultSelectedDate(defaultDate.getTime())
                 .textColor(Color.LTGRAY, Color.WHITE)
-                .selectedDateBackground(Color.TRANSPARENT)
                 .build();
 
         horizontalCalendar.setCalendarListener(new HorizontalCalendarListener() {
             @Override
             public void onDateSelected(Date date, int position) {
                 Toast.makeText(MainActivity.this, DateFormat.getDateInstance().format(date) + " is selected!", Toast.LENGTH_SHORT).show();
+                Log.d("Selected Item: ", DateFormat.getDateInstance().format(date));
             }
 
         });

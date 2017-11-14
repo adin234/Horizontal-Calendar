@@ -16,11 +16,11 @@ repositories {
     }
     
     dependencies {
-      compile 'devs.mulham.horizontalcalendar:horizontalcalendar:1.1.0'
+      compile 'devs.mulham.horizontalcalendar:horizontalcalendar:1.2.0'
     }
 ```
 
-##Prerequisites
+## Prerequisites
 The minimum API level supported by this library is **API 9 (GINGERBREAD)**.
 
 ## Usage
@@ -113,7 +113,7 @@ You can customize it directly inside your layout:
             app:textColorNormal="#bababa"
             app:textColorSelected="#FFFF"
             app:selectorColor="#c62828"   // default to colorAccent.
-            app:selectedDateBackground="#00ffffff"/>
+            app:selectedDateBackground="@drawable/myDrwable"/>
 ```
 
 Or you can do it programmatically in your Activity using the **Builder**:
@@ -125,12 +125,13 @@ HorizontalCalendar horizontalCalendar = new HorizontalCalendar.Builder(this, R.i
                 .datesNumberOnScreen(5)   // Number of Dates cells shown on screen (Recommended 5)
                 .dayNameFormat("EEE")	  // WeekDay text format
                 .dayNumberFormat("dd")    // Date format
-				.monthFormat("MMM") 	  // Month format
-				.showDayName(true)	  // Show or Hide dayName text
-				.showMonthName(true)	  // Show or Hide month text
+                .monthFormat("MMM") 	  // Month format
+                .showDayName(true)	  // Show or Hide dayName text
+                .showMonthName(true)	  // Show or Hide month text
                 .textColor(Color.LTGRAY, Color.WHITE)    // Text color for none selected Dates, Text color for selected Date.
-                .selectedDateBackground(Color.TRANSPARENT)  // Background color of the selected date cell.
+                .selectedDateBackground(Drawable)  // Background Drawable of the selected date cell.
                 .selectorColor(Color.RED)   // Color of the selection indicator bar (default to colorAccent).
+                .defaultSelectedDate(date)  // Date to be seleceted at start (default to Today)
                 .build();
 ```
 
